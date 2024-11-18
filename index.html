@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script
+      src="https://kit.fontawesome.com/bfeadbf96d.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <!-- header -->
+    <header>
+      <div class="logo-name">
+        <h1>LOGO</h1>
+        <h1>POS System</h1>
+      </div>
+      <div class="datetime-container">
+        <p id="current-date"></p>
+        <p id="current-time"></p>
+      </div>
+      <div class="username-pic">
+        <i class="fa-regular fa-circle-user"></i>
+        <h2>Mahesha Dinushan</h2>
+      </div>
+    </header>
+    <div class="sidebar-main">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <a class="active-link" href="#" onclick="showSection('home', this)"
+          >Home</a
+        >
+        <a href="#" onclick="showSection('customers', this)">Customers</a>
+        <a href="#" onclick="showSection('items', this)">Items</a>
+        <a href="#" onclick="showSection('place-order', this)">Place Order</a>
+      </div>
+
+      <!-- Main Content Area -->
+      <div class="content">
+        <section id="home" class="section active home-sec">
+          <p class="section-header">Welcome to the Home Section</p>
+
+          <div class="card-container">
+            <div class="card">
+              <div class="count-category">
+                <h3>1000 units</h3>
+                <p>sales</p>
+              </div>
+              <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+            <div class="card">
+              <div class="count-category">
+                <h3>1000</h3>
+                <p>Customers</p>
+              </div>
+              <i class="fa-solid fa-people-group"></i>
+            </div>
+            <div class="card">
+              <div class="count-category">
+                <h3>1000</h3>
+                <p>Orders</p>
+              </div>
+              <i class="fa-solid fa-dolly"></i>
+            </div>
+            <div class="card">
+              <div class="count-category">
+                <h3>Rs.1000</h3>
+                <p>Revenue</p>
+              </div>
+              <i class="fa-solid fa-sack-dollar"></i>
+            </div>
+          </div>
+        </section>
+        <section id="customers" class="section customers-sec">
+          <p class="section-header">Customers</p>
+          <div class="search-customer">
+            <div class="search-box">
+              <input type="text" id="searchCustomerInput" placeholder="Search Customer" />
+              <button class="search-btn" onclick="searchCustomer()">
+                <i class="fa-solid fa-magnifying-glass"></i> Search
+              </button>
+            </div>
+        
+            <!-- Customer Details Form -->
+            <div class="customer-form-overlay" id="customerFormOverlay">
+              <div class="customer-form-container">
+                <div class="customer-form-header">
+                  <h2>Customer Details</h2>
+                  <button type="button" class="close-btn" onclick="closeCustomerForm()">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+        
+                <form class="customer-detail-form" id="customerDetailsForm">
+                  <label for="customerName">Customer Name:</label>
+                  <input type="text" id="customerName" disabled />
+        
+                  <label for="customerAddress">Address:</label>
+                  <input type="text" id="customerAddress" disabled />
+        
+                  <label for="customerPhone">Phone Number:</label>
+                  <input type="tel" id="customerPhone" disabled />
+        
+                  <button type="button" class="delete-btn" onclick="deleteCustomer()">
+                    Delete
+                  </button>
+                  <button type="button" class="edit-btn" onclick="editCustomer()">
+                    Edit
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        
+          <div class="crud">
+            <div class="button-container">
+              <div class="add-new-container">
+                <button class="add-new-btn" onclick="openForm()">Add New Customer</button>
+              </div>
+            </div>
+        
+            <!-- Add Customer Form -->
+            
+              <div id="formOverlay" class="overlay">
+                <div class="form-container">
+                  <h2>Add New Customer</h2>
+                  <form  class="add-new-form">
+                    <label for="customerId">Customer ID</label>
+                    <input type="text" id="customerId" disabled>
+  
+                    <label for="customerName">Name</label>
+                    <input type="text" id="customerName" required>
+  
+                    <label for="customerAddress">Address</label>
+                    <input type="text" id="customerAddress" required>
+  
+                    <label for="customerPhone">Phone</label>
+                    <input type="text" id="customerPhone" required>
+  
+                    <button class="save-btn" onclick="saveCustomer()">Save</button>
+                    <button class="close-btn" onclick="closeForm()">Close</button>
+                  </form>
+                  
+                </div>
+              </div>
+            
+          </div>
+        
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Customer ID</th>
+                  <th>Customer Name</th>
+                  <th>Address</th>
+                  <th>Phone Number</th>
+                </tr>
+              </thead>
+              <tbody id="customerTableBody">
+                <!-- Customer rows will be populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section id="items" class="section items-sec">
+          <p class="section-header">Items</p>
+          <div class="search-item">
+            <div class="search-box">
+              <input
+                type="text"
+                id="searchItemInput"
+                placeholder="Search Item"
+              />
+              <button class="search-btn" onclick="searchItem()">
+                <i class="fa-solid fa-magnifying-glass"></i> Search
+              </button>
+            </div>
+            <!-- Item Details Form -->
+            <div class="item-form-overlay" id="itemFormOverlay">
+              <div class="item-form-container">
+                <div class="item-form-header">
+                  <h2>Customer Details</h2>
+                  <button
+                    type="button"
+                    class="close-btn"
+                    onclick="closeItemForm()"
+                  >
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+
+                <form class="item-detail-form" id="itemDetailsForm">
+                  <label for="itemName">Item Name:</label>
+                  <input type="text" id="itemName" disabled />
+
+                  <label for="itemPrice">Item Price:</label>
+                  <input type="text" id="itemPrice" disabled />
+
+                  <label for="itemQuantity">Item Quantity:</label>
+                  <input type="tel" id="itemQuantity" disabled />
+
+                  <button
+                    type="button"
+                    class="delete-btn"
+                    onclick="deleteItem()"
+                  >
+                    Delete
+                  </button>
+                  <button
+                    type="button"
+                    class="edit-btn"
+                    onclick="editItem()"
+                  >
+                    Edit
+                  </button>
+                </form>
+              </div>
+            </div>
+            <div class="item-crud">
+              <div class="item-button-container">
+                <div class="add-new-item-container">
+                  <button class="add-new-item-btn" onclick="openItemForm()">Add New Item</button>
+                </div>
+              </div>
+              <div class="item-form-overlay" id="itemFormOverlay">
+                <div class="item-form-container">
+                  <h2>Add New Item</h2>
+                  <form class="add-new-item-form" id="itemForm">
+                    <label for="itemNameInput">Item Name:</label>
+                    <input type="text" id="itemNameInput" placeholder="Enter item name" />
+            
+                    <label for="itemPriceInput">Price:</label>
+                    <input type="text" id="itemPriceInput" placeholder="Enter item price" />
+            
+                    <label for="itemQuantityInput">Quantity:</label>
+                    <input type="tel" id="itemQuantityInput" placeholder="Enter quantity" />
+            
+                    <button type="button" class="close-item-btn" onclick="closeItemForm()">Close</button>
+                    <button type="button" class="save-item-btn" onclick="saveItem()">Save</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="item-table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Item ID</th>
+                    <th>Item Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>001</td>
+                    <td>Birthday Cake</td>
+                    <td>Rs.1000</td>
+                    <td>200</td>
+                  </tr>
+                  <tr>
+                    <td>002</td>
+                    <td>Doughnut</td>
+                    <td>Rs.200</td>
+                    <td>1000</td>
+                  </tr>
+                  <tr>
+                    <td>003</td>
+                    <td>Croissant</td>
+                    <td>Rs.150</td>
+                    <td>500</td>
+                  </tr>
+                  <tr>
+                    <td>004</td>
+                    <td>Chocolate Muffin</td>
+                    <td>Rs.250</td>
+                    <td>300</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+        </section>
+        <section id="place-order" class="section place-order-sec">
+          <p class="section-header">Place Order</p>
+        
+          <!-- Search Order -->
+          <div class="search-order">
+            <div class="search-box">
+              <input type="text" id="orderSearchInput" placeholder="Search Order" />
+              <button class="search-btn" onclick="searchOrder()">
+                <i class="fa-solid fa-magnifying-glass"></i> Search
+              </button>
+            </div>
+        
+            <!-- Order Details Form Overlay -->
+            <div class="order-form-overlay" id="orderFormOverlay">
+              <div class="order-form-container">
+                <div class="order-form-header">
+                  <h2>Order Details</h2>
+                  <button type="button" class="close-btn" onclick="closeOrderForm()">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+                <form class="order-detail-form" id="orderDetailsForm">
+                  <label for="orderId">Order ID:</label>
+                  <input type="text" id="orderId" disabled />
+        
+                  <label for="orderCustomerName">Customer Name:</label>
+                  <input type="text" id="orderCustomerName" disabled />
+        
+                  <label for="orderDate">Order Date:</label>
+                  <input type="text" id="orderDate" disabled />
+        
+                  <label for="orderTotal">Order Total:</label>
+                  <input type="text" id="orderTotal" disabled />
+        
+                  <button type="button" class="delete-btn" onclick="deleteOrder()">
+                    Delete
+                  </button>
+                  <button type="button" class="edit-btn" onclick="editOrder()">
+                    Edit
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        
+          <!-- Place New Order Button -->
+          <div class="crud">
+            <div class="button-container">
+              <div class="add-new-container">
+                <button class="add-new-btn" onclick="openOrderForm()">Place New Order</button>
+              </div>
+            </div>
+            <div class="order-form-overlay" id="newOrderFormOverlay">
+              <div class="form-container">
+                <h2>Place New Order</h2>
+                <form class="add-new-form" id="newOrderForm">
+                  <label for="newOrderCustomerName">Customer Name:</label>
+                  <input type="text" id="newOrderCustomerName" placeholder="Enter customer name" />
+        
+                  <label for="newOrderDate">Order Date:</label>
+                  <input type="date" id="newOrderDate" />
+        
+                  <label for="newOrderTotal">Order Total:</label>
+                  <input type="text" id="newOrderTotal" placeholder="Enter order total" />
+        
+                  <button type="button" class="close-btn" onclick="closeNewOrderForm()">Close</button>
+                  <button type="button" class="save-btn" onclick="saveOrder()">Save</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        
+          <!-- Order Table -->
+          <div class="order-table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer Name</th>
+                  <th>Order Date</th>
+                  <th>Order Total</th>
+                </tr>
+              </thead>
+              <tbody id="orderTableBody">
+                <!-- Sample Orders -->
+                <tr>
+                  <td>001</td>
+                  <td>Mahesha Dinu</td>
+                  <td>2023-10-31</td>
+                  <td>Rs.1500</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        
+      </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/db/db.js"></script>
+    <script src="/js/controllers/customerController.js"></script>
+  </body>
+</html>
+
+
